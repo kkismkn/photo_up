@@ -95,7 +95,7 @@ def handle_image(event):
 #メッセージIDに紐づく画像をサーバへ保存
 #戻り値：保存したファイル名(絶対パス)
 def save_image(messegeid):
-    message_content = lINE_BOT_API.get_message_content(messegeid)
+    message_content = line_bot_api.get_message_content(messegeid)
 
     i = Image.open(BytesIO(message_content.content))
     filename = '/tmp/' + messegeid + '.jpg'
