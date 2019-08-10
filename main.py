@@ -4,11 +4,10 @@
 import os
 import sys
 import datetime
+from PIL import Image
 
 from io import BytesIO
-
 from argparse import ArgumentParser
-
 from flask import Flask, request, abort
 from linebot import (
     LineBotApi, WebhookHandler
@@ -20,7 +19,6 @@ from linebot.exceptions import (
 from linebot.models import (
     ImageMessage, MessageEvent, TextMessage, TextSendMessage
 )
-
 #googleAPI
 from pydrive.auth import GoogleAuth
 from pydrive.drive import GoogleDrive
