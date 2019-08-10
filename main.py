@@ -25,6 +25,11 @@ from pydrive.drive import GoogleDrive
 
 app = Flask(__name__)
 
+#google認証
+gauth = GoogleAuth()
+gauth.CommandLineAuth()
+drive = GoogleDrive(gauth)
+
 # get channel_secret and channel_access_token from your environment variable
 channel_secret = os.getenv('LINE_CHANNEL_SECRET', None)
 channel_access_token = os.getenv('LINE_CHANNEL_ACCESS_TOKEN', None)
@@ -65,12 +70,10 @@ def message_text(event):
         TextSendMessage(text="なんや")
     )
 
+#画像メッセージ受診時の挙動をハンドラへ設定
 @handler.add(MessageEvent, message=ImageMessage)
 def handle_image(event):
-    #google認証
-    gauth = GoogleAuth()
-    gauth.CommandLineAuth()
-    drive = GoogleDrive(gauth)
+    create_folder()
 
     #ファイルのガラを生成
     #ファイル名：YYYYMMDDhh24mmss
@@ -90,6 +93,17 @@ def handle_image(event):
         event.reply_token,
         TextSendMessage(text="いい写真")
     )
+
+#画像保存先フォルダ作成
+def create_folder():
+    #root直下にあるフォルダリスト生成(タイトル降順)
+    file_list = drive.ListFile({'q': 'mimeType = "application/vnd.google-apps.folder" and not "root" in parents'
+                                'orderBy': 'title desc'}).GetList()
+
+    #フォルダ名展開
+    for f in file_list:
+        print(f['title'], '   \t', f['id'])
+
 
 #メッセージIDに紐づく画像をサーバへ保存
 #戻り値：保存したファイル名(絶対パス)
