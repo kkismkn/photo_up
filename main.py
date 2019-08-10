@@ -3,6 +3,8 @@
 
 import os
 import sys
+import datetime
+
 from io import BytesIO
 
 from argparse import ArgumentParser
@@ -19,6 +21,7 @@ from linebot.models import (
     ImageMessage, MessageEvent, TextMessage, TextSendMessage
 )
 
+#googleAPI
 from pydrive.auth import GoogleAuth
 from pydrive.drive import GoogleDrive
 
@@ -66,6 +69,7 @@ def message_text(event):
 
 @handler.add(MessageEvent, message=ImageMessage)
 def handle_image(event):
+    #google認証
     gauth = GoogleAuth()
     gauth.CommandLineAuth()
     drive = GoogleDrive(gauth)
@@ -77,12 +81,12 @@ def handle_image(event):
 
     #ファイルアップロード
     f.SetContentFile('test.jpg')
-    
+
     f.Upload()
 
     line_bot_api.reply_message(
         event.reply_token,
-        TextSendMessage(text=event.message.previewImageUrl)
+        TextSendMessage(text="いい写真")
     )
 
 if __name__ == "__main__":
