@@ -80,13 +80,13 @@ def handle_image(event):
     #ファイルのガラを生成
     #ファイル名：YYYYMMDDhh24mmssfff
     #形式：jpg
-    f = drive.CreateFile({'title': datetime.datetime.now().strftime('%Y%m%d%H%M%S%f'),
+    message_id = event.message.id
+    f = drive.CreateFile({'title': dmessage_id,
                           'mimeType': 'image/jpeg',
                           'parents': [{'kind': 'drive#fileLink', 'id':'195Q4Ngwglfd0XDOcMxQ6ruz4ccHHig-p'}]}) #通常用
                           #'parents': [{'kind': 'drive#fileLink', 'id':'1Sa8RGDT2gVZYGRE_MIJ4_URlErRFBTKi'}]}) #結婚式用
 
     #ファイルをサーバへ保存
-    message_id = event.message.id
     filename = save_image(message_id)
 
     #ファイルアップロード
