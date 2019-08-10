@@ -80,7 +80,7 @@ def handle_image(event):
     f = drive.CreateFile({'title': datetime.datetime.now().strftime('%Y%m%d%H%M%S%N'), 'mimeType': 'image/jpeg'})
 
     message_id = event.message.id
-    filename = save_image(messegeid)
+    filename = save_image(message_id)
 
     #ファイルアップロード
     f.SetContentFile(filename)
@@ -92,6 +92,8 @@ def handle_image(event):
         TextSendMessage(text="いい写真")
     )
 
+#メッセージIDに紐づく画像をサーバへ保存
+#戻り値：保存したファイル名(絶対パス)
 def save_image(messegeid):
     message_content = lINE_BOT_API.get_message_content(messegeid)
 
