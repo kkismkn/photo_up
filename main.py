@@ -78,7 +78,9 @@ def handle_image(event):
     #ファイルのガラを生成
     #ファイル名：YYYYMMDDhh24mmss
     #形式：jpg
-    f = drive.CreateFile({'title': datetime.datetime.now().strftime('%Y%m%d%H%M%S%f'), 'mimeType': 'image/jpeg'})
+    f = drive.CreateFile({'title': datetime.datetime.now().strftime('%Y%m%d%H%M%S%f'),
+                          'mimeType': 'image/jpeg',
+                          'parents': [{'kind': 'drive#fileLink', 'id':'1Sa8RGDT2gVZYGRE_MIJ4_URlErRFBTKi'}]})
 
     #ファイルをサーバへ保存
     message_id = event.message.id
@@ -93,15 +95,6 @@ def handle_image(event):
         event.reply_token,
         TextSendMessage(text="いい写真")
     )
-
-#画像保存先フォルダ作成
-def create_folder():
-    #root直下にあるフォルダリスト生成(タイトル降順)
-    file_list = drive.ListFile({'q': 'mimeType = "application/vnd.google-apps.folder" and not "root" in parents','orderBy': 'title desc'}).GetList()
-
-    #フォルダ名展開
-    for f in file_list:
-        print(f['title'], '   \t', f['id'])
 
 
 #メッセージIDに紐づく画像をサーバへ保存
