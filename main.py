@@ -12,8 +12,9 @@ from linebot import (
 from linebot.exceptions import (
     InvalidSignatureError
 )
+#使いたいイベントをインポート
 from linebot.models import (
-    MessageEvent, TextMessage, TextSendMessage,
+    ImageMessage, MessageEvent, TextMessage, TextSendMessage
 )
 
 app = Flask(__name__)
@@ -58,6 +59,12 @@ def message_text(event):
         TextSendMessage(text="なんや")
     )
 
+@handler.add(MessageEvent, message=ImageMessage)
+def message_text(event):
+    line_bot_api.reply_message(
+        event.reply_token,
+        TextSendMessage(text="いい写真")
+    )
 
 if __name__ == "__main__":
     port = int(os.getenv("PORT", 5000))
