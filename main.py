@@ -73,8 +73,6 @@ def message_text(event):
 #画像メッセージ受診時の挙動をハンドラへ設定
 @handler.add(MessageEvent, message=ImageMessage)
 def handle_image(event):
-    create_folder()
-
     #ファイルのガラを生成
     #ファイル名：YYYYMMDDhh24mmss
     #形式：jpg
