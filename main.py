@@ -55,7 +55,7 @@ def callback():
 def message_text(event):
     line_bot_api.reply_message(
         event.reply_token,
-        TextSendMessage(text=event.message.text)
+        TextSendMessage(text="なんや")
     )
 
 if __name__ == "__main__":
