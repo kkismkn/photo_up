@@ -58,8 +58,6 @@ def message_text(event):
         TextSendMessage(text="なんや")
     )
 
-@handler.add(MessageEvent, message=ImageMessage)
-
 
 if __name__ == "__main__":
     port = int(os.getenv("PORT", 5000))
