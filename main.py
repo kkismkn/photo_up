@@ -80,10 +80,10 @@ def handle_image(event):
     f = drive.CreateFile({'title': datetime.datetime.now().strftime('%Y%m%d%H%M%S%N'), 'mimeType': 'image/jpeg'})
 
     message_id = event.message.id
-    message_content = line_bot_api.get_message_content(message_id)
-    image = BytesIO(message_content.content)
+    filename = save_image(messegeid)
+
     #ファイルアップロード
-    f.SetContentFile(message_content)
+    f.SetContentFile(filename)
 
     f.Upload()
 
@@ -91,6 +91,16 @@ def handle_image(event):
         event.reply_token,
         TextSendMessage(text="いい写真")
     )
+
+def save_image(messegeid):
+    message_content = lINE_BOT_API.get_message_content(messegeid)
+
+    i = Image.open(BytesIO(message_content.content))
+    filename = '/tmp/' + messegeid + '.jpg'
+    i.save(filename)
+
+    return filename
+
 
 if __name__ == "__main__":
     port = int(os.getenv("PORT", 5000))
