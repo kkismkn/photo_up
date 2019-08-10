@@ -67,7 +67,7 @@ def message_text(event):
     image = BytesIO(message_content.content)
     line_bot_api.reply_message(
         event.reply_token,
-        TextSendMessage(text=image.contentProvider.originalContentUrl)
+        TextSendMessage(text="いい写真")
     )
 
 if __name__ == "__main__":
