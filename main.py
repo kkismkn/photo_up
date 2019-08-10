@@ -66,7 +66,8 @@ def callback():
 @handler.add(MessageEvent, message=TextMessage)
 #オウム返し
 def message_text(event):
-    replyList = ["写真を…写真をください…", "写真をくれればクラウドに保存するよ！", "なんや", "はろー", "会話は…ちょっと…", "わたしがくまだ"]
+    replyList = ["写真を…写真をください…", "写真をくれればクラウドに保存するよ！", "なんや", "はろー", "会話は…ちょっと…",
+                 "わたしがくまだ", "はちみつください", "鮭とかくれてもいいよ"]
     replyText = random.choice(replyList)
     line_bot_api.reply_message(
         event.reply_token,
@@ -81,8 +82,8 @@ def handle_image(event):
     #形式：jpg
     f = drive.CreateFile({'title': datetime.datetime.now().strftime('%Y%m%d%H%M%S%f'),
                           'mimeType': 'image/jpeg',
-                          'parents': [{'kind': 'drive#fileLink', 'id':'195Q4Ngwglfd0XDOcMxQ6ruz4ccHHig-p'}]})
-                          #'parents': [{'kind': 'drive#fileLink', 'id':'1Sa8RGDT2gVZYGRE_MIJ4_URlErRFBTKi'}]})
+                          'parents': [{'kind': 'drive#fileLink', 'id':'195Q4Ngwglfd0XDOcMxQ6ruz4ccHHig-p'}]}) #通常用
+                          #'parents': [{'kind': 'drive#fileLink', 'id':'1Sa8RGDT2gVZYGRE_MIJ4_URlErRFBTKi'}]}) #結婚式用
 
     #ファイルをサーバへ保存
     message_id = event.message.id
