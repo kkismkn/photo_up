@@ -75,16 +75,17 @@ def handle_image(event):
     #ファイルのガラを生成
     #ファイル名：YYYYMMDDhh24mmss
     #形式：jpg
-    f = drive.CreateFile({'title': datetime.datetime.now().strftime('%Y%m%d%H%M%S%N'), 'mimeType': 'image/jpeg'})
+    f = drive.CreateFile({'title': datetime.datetime.now().strftime('%Y%m%d%H%M%S%f'), 'mimeType': 'image/jpeg'})
 
+    #ファイルをサーバへ保存
     message_id = event.message.id
     filename = save_image(message_id)
 
     #ファイルアップロード
     f.SetContentFile(filename)
-
     f.Upload()
 
+    #ユーザへ応答
     line_bot_api.reply_message(
         event.reply_token,
         TextSendMessage(text="いい写真")
@@ -94,10 +95,9 @@ def handle_image(event):
 #戻り値：保存したファイル名(絶対パス)
 def save_image(messegeid):
     message_content = line_bot_api.get_message_content(messegeid)
-
-    i = Image.open(BytesIO(message_content.content))
+    image = Image.open(BytesIO(message_content.content))
     filename = '/tmp/' + messegeid + '.jpg'
-    i.save(filename)
+    image.save(filename)
 
     return filename
 
