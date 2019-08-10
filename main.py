@@ -14,7 +14,7 @@ from linebot.exceptions import (
 )
 #使いたいイベントをインポート
 from linebot.models import (
-    ImageMessage, MessageEvent, TextMessage, TextSendMessage, ImageSendMessage
+    ImageMessage, MessageEvent, TextMessage, TextSendMessage
 )
 
 app = Flask(__name__)
@@ -61,10 +61,6 @@ def message_text(event):
 
 @handler.add(MessageEvent, message=ImageMessage)
 def message_text(event):
-    message_id = event.message.id
-    message_content = line_bot_api.get_message_content(message_id)
-
-    image = BytesIO(message_content.content)
     line_bot_api.reply_message(
         event.reply_token,
         TextSendMessage(text="いい写真")
