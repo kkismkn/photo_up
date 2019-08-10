@@ -65,11 +65,9 @@ def message_text(event):
     message_content = line_bot_api.get_message_content(message_id)
 
     image = BytesIO(message_content.content)
-
     line_bot_api.reply_message(
         event.reply_token,
-        ImageSendMessage(original_content_url=image.contentProvider.originalContentUrl,
-                         preview_image_url=image.contentProvider.previewImageUrl)
+        TextSendMessage(text=image.contentProvider.originalContentUrl)
     )
 
 if __name__ == "__main__":
