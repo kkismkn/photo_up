@@ -77,7 +77,7 @@ def handle_image(event):
     #ファイルのガラを生成
     #ファイル名：YYYYMMDDhh24mmss
     #形式：jpg
-    f = drive.CreateFile({'title': datetime.now().strftime('%Y%m%d%H%M%S'), 'mimeType': 'image/jpeg'})
+    f = drive.CreateFile({'title': datetime.datetime.now().strftime('%Y%m%d%H%M%S'), 'mimeType': 'image/jpeg'})
 
     #ファイルアップロード
     f.SetContentFile('test.jpg')
