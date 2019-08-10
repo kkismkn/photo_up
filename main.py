@@ -3,6 +3,8 @@
 
 import os
 import sys
+from io import BytesIO
+
 from argparse import ArgumentParser
 
 from flask import Flask, request, abort
