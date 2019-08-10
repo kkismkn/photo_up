@@ -97,8 +97,7 @@ def handle_image(event):
 #画像保存先フォルダ作成
 def create_folder():
     #root直下にあるフォルダリスト生成(タイトル降順)
-    file_list = drive.ListFile({'q': 'mimeType = "application/vnd.google-apps.folder" and not "root" in parents'
-                                'orderBy': 'title desc'}).GetList()
+    file_list = drive.ListFile({'q': 'mimeType = "application/vnd.google-apps.folder" and not "root" in parents','orderBy': 'title desc'}).GetList()
 
     #フォルダ名展開
     for f in file_list:
