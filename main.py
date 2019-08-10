@@ -3,7 +3,6 @@
 
 import os
 import sys
-import datetime
 import random
 from PIL import Image
 from io import BytesIO
@@ -81,7 +80,7 @@ def handle_image(event):
     #ファイル名：YYYYMMDDhh24mmssfff
     #形式：jpg
     message_id = event.message.id
-    f = drive.CreateFile({'title': dmessage_id,
+    f = drive.CreateFile({'title': message_id,
                           'mimeType': 'image/jpeg',
                           'parents': [{'kind': 'drive#fileLink', 'id':'195Q4Ngwglfd0XDOcMxQ6ruz4ccHHig-p'}]}) #通常用
                           #'parents': [{'kind': 'drive#fileLink', 'id':'1Sa8RGDT2gVZYGRE_MIJ4_URlErRFBTKi'}]}) #結婚式用
