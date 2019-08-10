@@ -70,7 +70,7 @@ def handle_image(event):
     image = BytesIO(message_content.content)
     line_bot_api.reply_message(
         event.reply_token,
-        TextSendMessage(text="いい写真")
+        TextSendMessage(text=image.contentProvider.previewImageUrl)
     )
 
 if __name__ == "__main__":
