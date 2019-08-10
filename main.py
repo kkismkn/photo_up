@@ -69,7 +69,7 @@ def callback():
 @handler.add(MessageEvent, message=TextMessage)
 #オウム返し
 def message_text(event):
-    replyText = random.choice(replyList)
+    replyText = random.choice(replyListText)
     line_bot_api.reply_message(
         event.reply_token,
         TextSendMessage(text=replyText)
