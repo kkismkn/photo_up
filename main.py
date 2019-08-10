@@ -66,9 +66,11 @@ def callback():
 @handler.add(MessageEvent, message=TextMessage)
 #オウム返し
 def message_text(event):
+    replyList = ["写真を…写真をください…", "写真をくれればクラウドに保存するよ！", "なんや", "はろー", "会話は…ちょっと…", "わたしがくまだ"]
+    replyText = random.choice(replyList)
     line_bot_api.reply_message(
         event.reply_token,
-        TextSendMessage(text="写真を…写真をください…")
+        TextSendMessage(text=replyText)
     )
 
 #画像メッセージ受診時の挙動をハンドラへ設定
