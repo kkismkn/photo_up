@@ -1,16 +1,5 @@
 # -*- coding: utf-8 -*-
 
-#  Licensed under the Apache License, Version 2.0 (the "License"); you may
-#  not use this file except in compliance with the License. You may obtain
-#  a copy of the License at
-#
-#       https://www.apache.org/licenses/LICENSE-2.0
-#
-#  Unless required by applicable law or agreed to in writing, software
-#  distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
-#  WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
-#  License for the specific language governing permissions and limitations
-#  under the License.
 
 import os
 import sys
@@ -60,14 +49,23 @@ def callback():
 
     return 'OK'
 
-
+#テキストメッセージ受信時の挙動をハンドラへ設定
 @handler.add(MessageEvent, message=TextMessage)
+#オウム返し
 def message_text(event):
+    print(event.message.text)
     line_bot_api.reply_message(
         event.reply_token,
         TextSendMessage(text=event.message.text)
     )
 
+#画像受診時の挙動をハンドラへ設定
+@handler.add(MessageEvent, message=ImageMessage)
+def handle_image(event):
+    line_bot_api.reply_message(
+        event.reply_token,
+        TextSendMessage(text='いい画だ！')
+    )
 
 if __name__ == "__main__":
     port = int(os.getenv("PORT", 5000))
