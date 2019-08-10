@@ -53,18 +53,9 @@ def callback():
 @handler.add(MessageEvent, message=TextMessage)
 #オウム返し
 def message_text(event):
-    print(event.message.text)
     line_bot_api.reply_message(
         event.reply_token,
         TextSendMessage(text=event.message.text)
-    )
-
-#画像受診時の挙動をハンドラへ設定
-@handler.add(MessageEvent, message=ImageMessage)
-def handle_image(event):
-    line_bot_api.reply_message(
-        event.reply_token,
-        TextSendMessage(text='いい画だ！')
     )
 
 if __name__ == "__main__":
