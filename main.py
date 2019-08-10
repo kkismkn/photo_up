@@ -31,6 +31,9 @@ gauth = GoogleAuth()
 gauth.CommandLineAuth()
 drive = GoogleDrive(gauth)
 
+    replyListText = ["写真を…写真をください…", "写真をくれればクラウドに保存するよ！", "なんや", "はろー", "会話は…ちょっと…",
+                     "わたしがくまだ", "はちみつください", "鮭とかくれてもいいよ"]
+
 # get channel_secret and channel_access_token from your environment variable
 channel_secret = os.getenv('LINE_CHANNEL_SECRET', None)
 channel_access_token = os.getenv('LINE_CHANNEL_ACCESS_TOKEN', None)
@@ -66,8 +69,6 @@ def callback():
 @handler.add(MessageEvent, message=TextMessage)
 #オウム返し
 def message_text(event):
-    replyList = ["写真を…写真をください…", "写真をくれればクラウドに保存するよ！", "なんや", "はろー", "会話は…ちょっと…",
-                 "わたしがくまだ", "はちみつください", "鮭とかくれてもいいよ"]
     replyText = random.choice(replyList)
     line_bot_api.reply_message(
         event.reply_token,
