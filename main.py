@@ -81,10 +81,9 @@ def handle_image(event):
 
     message_id = event.message.id
     message_content = line_bot_api.get_message_content(message_id)
-
     image = BytesIO(message_content.content)
     #ファイルアップロード
-    f.SetContentFile(image)
+    f.SetContentFile(message_content)
 
     f.Upload()
 
