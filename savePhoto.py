@@ -5,7 +5,7 @@ gauth = GoogleAuth()
 gauth.CommandLineAuth()
 drive = GoogleDrive(gauth)
 
-def savePhotoToGoogle(image_url=None, image=None):
+def savePhotoToGoogle():
     f = drive.CreateFile({'title': 'test.jpg', 'mimeType': 'image/jpeg'})
     f.SetContentFile('test.jpg')
     f.Upload()

@@ -19,6 +19,9 @@ from linebot.models import (
     ImageMessage, MessageEvent, TextMessage, TextSendMessage
 )
 
+from pydrive.auth import GoogleAuth
+from pydrive.drive import GoogleDrive
+
 app = Flask(__name__)
 
 # get channel_secret and channel_access_token from your environment variable
@@ -56,6 +59,14 @@ def callback():
 @handler.add(MessageEvent, message=TextMessage)
 #オウム返し
 def message_text(event):
+    gauth = GoogleAuth()
+    gauth.CommandLineAuth()
+    drive = GoogleDrive(gauth)
+
+    f = drive.CreateFile({'title': 'test.jpg', 'mimeType': 'image/jpeg'})
+    f.SetContentFile('test.jpg')
+    f.Upload()
+
     line_bot_api.reply_message(
         event.reply_token,
         TextSendMessage(text="なんや")
