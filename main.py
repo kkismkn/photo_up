@@ -59,14 +59,6 @@ def callback():
 @handler.add(MessageEvent, message=TextMessage)
 #オウム返し
 def message_text(event):
-    gauth = GoogleAuth()
-    gauth.CommandLineAuth()
-    drive = GoogleDrive(gauth)
-
-    f = drive.CreateFile({'title': 'test.jpg', 'mimeType': 'image/jpeg'})
-    f.SetContentFile('test.jpg')
-    f.Upload()
-
     line_bot_api.reply_message(
         event.reply_token,
         TextSendMessage(text="なんや")
@@ -74,11 +66,20 @@ def message_text(event):
 
 @handler.add(MessageEvent, message=ImageMessage)
 def handle_image(event):
-    print("handle_image:", event)
-    message_id = event.message.id
-    message_content = line_bot_api.get_message_content(message_id)
+    gauth = GoogleAuth()
+    gauth.CommandLineAuth()
+    drive = GoogleDrive(gauth)
 
-    image = BytesIO(message_content.content)
+    #ファイルのガラを生成
+    #ファイル名：YYYYMMDDhh24mmss
+    #形式：jpg
+    f = drive.CreateFile({'title': datetime.now().strftime('%Y%m%d%H%M%S'), 'mimeType': 'image/jpeg'})
+
+    #ファイルアップロード
+    f.SetContentFile('test.jpg')
+    
+    f.Upload()
+
     line_bot_api.reply_message(
         event.reply_token,
         TextSendMessage(text=event.message.previewImageUrl)
