@@ -78,7 +78,7 @@ def message_text(event):
 @handler.add(MessageEvent, message=ImageMessage)
 def handle_image(event):
     #現在時刻(サーバ時刻 + 9時間)
-    now = datetime.datetime.now()# + datetime.timedelta(hour=9)
+    now = datetime.datetime.now() + datetime.timedelta(hours = 9)
 
     #ファイルのガラを生成
     #ファイル名：YYYYMMDDhh24mmssfff
