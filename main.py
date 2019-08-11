@@ -4,10 +4,11 @@
 import os
 import sys
 import random
+import datetime
 from PIL import Image
 from io import BytesIO
 
-from argparse import ArgumentParser
+#from argparse import ArgumentParser
 from flask import Flask, request, abort
 from linebot import (
     LineBotApi, WebhookHandler
@@ -76,16 +77,21 @@ def message_text(event):
 #画像メッセージ受診時の挙動をハンドラへ設定
 @handler.add(MessageEvent, message=ImageMessage)
 def handle_image(event):
+    line_bot_api.reply_message(
+        event.reply_token,
+        TextSendMessage(text="拝見します")
+    )
+    
     #ファイルのガラを生成
     #ファイル名：YYYYMMDDhh24mmssfff
     #形式：jpg
-    message_id = event.message.id
-    f = drive.CreateFile({'title': message_id,
+    f = drive.CreateFile({'title': datetime.datetime.now().strftime("%Y%m%d%H%M%S%f"),
                           'mimeType': 'image/jpeg',
                           'parents': [{'kind': 'drive#fileLink', 'id':'195Q4Ngwglfd0XDOcMxQ6ruz4ccHHig-p'}]}) #通常用
                           #'parents': [{'kind': 'drive#fileLink', 'id':'1Sa8RGDT2gVZYGRE_MIJ4_URlErRFBTKi'}]}) #結婚式用
 
     #ファイルをサーバへ保存
+    message_id = event.message.id
     filename = save_image(message_id)
 
     #ファイルアップロード
