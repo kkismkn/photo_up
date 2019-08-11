@@ -77,10 +77,13 @@ def message_text(event):
 #画像メッセージ受診時の挙動をハンドラへ設定
 @handler.add(MessageEvent, message=ImageMessage)
 def handle_image(event):
+    #現在時刻(サーバ時刻 + 9時間)
+    now = datetime.datetime.now() + datetime.timedelta(hour=9)
+
     #ファイルのガラを生成
-    #ファイル名：YYYYMMDDhh24mmssfff
+    #ファイル名：現在時刻(YYYYMMDDhh24mmssfff)
     #形式：jpg
-    f = drive.CreateFile({'title': datetime.datetime.now().strftime("%Y%m%d%H%M%S%f"),
+    f = drive.CreateFile({'title': now,
                           'mimeType': 'image/jpeg',
                           'parents': [{'kind': 'drive#fileLink', 'id':'195Q4Ngwglfd0XDOcMxQ6ruz4ccHHig-p'}]}) #通常用
                           #'parents': [{'kind': 'drive#fileLink', 'id':'1Sa8RGDT2gVZYGRE_MIJ4_URlErRFBTKi'}]}) #結婚式用
