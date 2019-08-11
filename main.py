@@ -77,11 +77,6 @@ def message_text(event):
 #画像メッセージ受診時の挙動をハンドラへ設定
 @handler.add(MessageEvent, message=ImageMessage)
 def handle_image(event):
-    line_bot_api.reply_message(
-        event.reply_token,
-        TextSendMessage(text="拝見します")
-    )
-    
     #ファイルのガラを生成
     #ファイル名：YYYYMMDDhh24mmssfff
     #形式：jpg
