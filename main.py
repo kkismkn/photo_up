@@ -68,14 +68,9 @@ def callback():
 @handler.add(MessageEvent, message=TextMessage)
 #オウム返し
 def message_text(event):
-    #replyList = ["写真を…写真をください…", "写真をくれればクラウドに保存するよ！", "なんや", "はろー", "会話は…ちょっと…",
-    #                 "わたしがくまだ", "はちみつください", "鮭とかくれてもいいよ"]
-    #replyText = random.choice(replyList)
-    endpoint = "https://api.a3rt.recruit-tech.co.jp/talk/v1/smalltalk"
-    params = {'apikey': "DZZiF7WacoaD6NVpsNl1bTJitbPQQC35",'query':"やあ"}
-    r = requests.get(endpoint,params)
-    data = json.loads(r.text)
-    replyText = str(data['status'])
+    replyList = ["写真を…写真をください…", "写真をくれればクラウドに保存するよ！", "なんや", "はろー", "会話は…ちょっと…",
+                     "わたしがくまだ", "はちみつください", "鮭とかくれてもいいよ"]
+    replyText = random.choice(replyList)
     line_bot_api.reply_message(
         event.reply_token,
         TextSendMessage(text=replyText)
