@@ -75,7 +75,7 @@ def message_text(event):
     params = {'apikey': "DZZiF7WacoaD6NVpsNl1bTJitbPQQC35",'query':event.message.text}
     r = requests.get(endpoint,params)
     data = json.loads(r.text)
-    replytext = str(data['status'])
+    replyText = str(data['status'])
     line_bot_api.reply_message(
         event.reply_token,
         TextSendMessage(text=replyText)
