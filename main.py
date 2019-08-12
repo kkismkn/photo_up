@@ -72,7 +72,7 @@ def message_text(event):
     #                 "わたしがくまだ", "はちみつください", "鮭とかくれてもいいよ"]
     #replyText = random.choice(replyList)
     endpoint = "https://api.a3rt.recruit-tech.co.jp/talk/v1/smalltalk"
-    params = {'apikey': "DZZiF7WacoaD6NVpsNl1bTJitbPQQC35",'query':event.message.text}
+    params = {'apikey': "DZZiF7WacoaD6NVpsNl1bTJitbPQQC35",'query':"やあ"}
     r = requests.get(endpoint,params)
     data = json.loads(r.text)
     replyText = str(data['status'])
