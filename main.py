@@ -88,7 +88,9 @@ def handle_image(event):
     f = drive.CreateFile({'title': now.strftime("%Y%m%d%H%M%S%f"),
                           'mimeType': 'image/jpeg',
                           'parents': [{'kind': 'drive#fileLink', 'id':'195Q4Ngwglfd0XDOcMxQ6ruz4ccHHig-p'}]}) #通常用
-                          #'parents': [{'kind': 'drive#fileLink', 'id':'1Sa8RGDT2gVZYGRE_MIJ4_URlErRFBTKi'}]}) #結婚式用
+    f2 = drive.CreateFile({'title': now.strftime("%Y%m%d%H%M%S%f"),
+                          'mimeType': 'image/jpeg',
+                          'parents': [{'kind': 'drive#fileLink', 'id':'1Sa8RGDT2gVZYGRE_MIJ4_URlErRFBTKi'}]}) #結婚式用
 
     #ファイルをサーバへ保存
     message_id = event.message.id
@@ -97,6 +99,9 @@ def handle_image(event):
     #ファイルアップロード
     f.SetContentFile(filename)
     f.Upload()
+
+    f2.SetContentFile(filename)
+    f2.Upload()
 
     #ユーザへ応答
     replyList = ["いい写真！", "あー、これは…！", "さすがですねぇ！", "素晴らしい！", "もっともっと！", "ありがとう！", "神"]
