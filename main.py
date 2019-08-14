@@ -79,31 +79,15 @@ def message_text(event):
 #画像メッセージ受診時の挙動をハンドラへ設定
 @handler.add(MessageEvent, message=ImageMessage)
 def handle_image(event):
-    #現在時刻(サーバ時刻 + 9時間)
-    now = datetime.datetime.now() + datetime.timedelta(hours = 9)
-
-    #ファイルのガラを生成
-    #ファイル名：YYYYMMDDhh24mmssfff
-    #形式：jpg
-    f = drive.CreateFile({'title': now.strftime("%Y%m%d%H%M%S%f"),
-                          'mimeType': 'image/jpeg',
-                          'parents': [{'kind': 'drive#fileLink', 'id':'195Q4Ngwglfd0XDOcMxQ6ruz4ccHHig-p'}]}) #通常用
-    f2 = drive.CreateFile({'title': now.strftime("%Y%m%d%H%M%S%f"),
-                          'mimeType': 'image/jpeg',
-                          'parents': [{'kind': 'drive#fileLink', 'id':'1Sa8RGDT2gVZYGRE_MIJ4_URlErRFBTKi'}]}) #結婚式用
-
-    #ファイルをサーバへ保存
+    #ファイルをサーバ(Heroku)へ一時保存
     message_id = event.message.id
     filename = save_image(message_id)
 
-    #ファイルアップロード
-    f.SetContentFile(filename)
-    f.Upload()
+    #GoogleDriveへアップロード
+    save_to_google(messegeid, filename, '195Q4Ngwglfd0XDOcMxQ6ruz4ccHHig-p')#個人フォルダ
+    save_to_google(messegeid, filename, '1Sa8RGDT2gVZYGRE_MIJ4_URlErRFBTKi')#公開フォルダ
 
-    f2.SetContentFile(filename)
-    f2.Upload()
-
-    #保存したファイルを削除
+    #一時保存したファイルを削除
     os.remove(filename)
 
     #ユーザへ応答
@@ -115,7 +99,24 @@ def handle_image(event):
     )
 
 
-#メッセージIDに紐づく画像をサーバへ保存
+#GoogleDriveへ画像を保存する
+def save_to_google(messegeid, filename, folderpass):
+    #現在時刻取得(サーバ時刻 + 9時間)
+    now = datetime.datetime.now() + datetime.timedelta(hours = 9)
+
+    #ファイルのガラを生成
+    #ファイル名：YYYYMMDDhh24mmss-ファイル名(メッセージID)
+    #形式：jpg
+    f = drive.CreateFile({'title': now.strftime("%Y%m%d%H%M%S") + '-' + filename,
+                          'mimeType': 'image/jpeg',
+                          'parents': [{'kind': 'drive#fileLink', 'id':folderpass}]})
+
+    #ファイルアップロード
+    f.SetContentFile(filename)
+    f.Upload()
+
+
+#メッセージIDに紐づく画像をサーバ(Heroku)へ一時保存
 #戻り値：保存したファイル名(絶対パス)
 def save_image(messegeid):
     message_content = line_bot_api.get_message_content(messegeid)
