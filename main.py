@@ -81,14 +81,14 @@ def message_text(event):
 def handle_image(event):
     #ファイルをサーバ(Heroku)へ一時保存
     message_id = event.message.id
-    filename = save_image(message_id)
+    file_name = save_image(message_id)
 
     #GoogleDriveへアップロード
-    save_to_google(messegeid, filename, '195Q4Ngwglfd0XDOcMxQ6ruz4ccHHig-p')#個人フォルダ
-    save_to_google(messegeid, filename, '1Sa8RGDT2gVZYGRE_MIJ4_URlErRFBTKi')#公開フォルダ
+    save_to_google(file_name, '195Q4Ngwglfd0XDOcMxQ6ruz4ccHHig-p')#個人フォルダ
+    save_to_google(file_name, '1Sa8RGDT2gVZYGRE_MIJ4_URlErRFBTKi')#公開フォルダ
 
     #一時保存したファイルを削除
-    os.remove(filename)
+    os.remove(file_name)
 
     #ユーザへ応答
     replyList = ["いい写真！", "あー、これは…！", "さすがですねぇ！", "素晴らしい！", "もっともっと！", "ありがとう！", "神"]
@@ -100,31 +100,31 @@ def handle_image(event):
 
 
 #GoogleDriveへ画像を保存する
-def save_to_google(messegeid, filename, folderpass):
+def save_to_google(file_name, folder_pass):
     #現在時刻取得(サーバ時刻 + 9時間)
     now = datetime.datetime.now() + datetime.timedelta(hours = 9)
 
     #ファイルのガラを生成
     #ファイル名：YYYYMMDDhh24mmss-ファイル名(メッセージID)
     #形式：jpg
-    f = drive.CreateFile({'title': now.strftime("%Y%m%d%H%M%S") + '-' + filename,
+    f = drive.CreateFile({'title': now.strftime("%Y%m%d%H%M%S") + '-' + file_name,
                           'mimeType': 'image/jpeg',
-                          'parents': [{'kind': 'drive#fileLink', 'id':folderpass}]})
+                          'parents': [{'kind': 'drive#fileLink', 'id':folder_pass}]})
 
     #ファイルアップロード
-    f.SetContentFile(filename)
+    f.SetContentFile(file_name)
     f.Upload()
 
 
 #メッセージIDに紐づく画像をサーバ(Heroku)へ一時保存
 #戻り値：保存したファイル名(絶対パス)
-def save_image(messegeid):
-    message_content = line_bot_api.get_message_content(messegeid)
+def save_image(messege_id):
+    message_content = line_bot_api.get_message_content(messege_id)
     image = Image.open(BytesIO(message_content.content))
-    filename = '/tmp/' + messegeid + '.jpg'
-    image.save(filename)
+    file_name = '/tmp/' + messege_id + '.jpg'
+    image.save(file_name)
 
-    return filename
+    return file_name
 
 
 if __name__ == "__main__":
