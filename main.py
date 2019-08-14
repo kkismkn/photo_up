@@ -84,8 +84,8 @@ def handle_image(event):
     file_name = save_image(message_id)
 
     #GoogleDriveへアップロード
-    save_to_google(file_name, '195Q4Ngwglfd0XDOcMxQ6ruz4ccHHig-p')#個人フォルダ
-    save_to_google(file_name, '1Sa8RGDT2gVZYGRE_MIJ4_URlErRFBTKi')#公開フォルダ
+    save_to_google(file_name, message_id, '195Q4Ngwglfd0XDOcMxQ6ruz4ccHHig-p')#個人フォルダ
+    save_to_google(file_name, message_id, '1Sa8RGDT2gVZYGRE_MIJ4_URlErRFBTKi')#公開フォルダ
 
     #一時保存したファイルを削除
     os.remove(file_name)
@@ -100,14 +100,14 @@ def handle_image(event):
 
 
 #GoogleDriveへ画像を保存する
-def save_to_google(file_name, folder_pass):
+def save_to_google(file_name, message_id, folder_pass):
     #現在時刻取得(サーバ時刻 + 9時間)
     now = datetime.datetime.now() + datetime.timedelta(hours = 9)
 
     #ファイルのガラを生成
     #ファイル名：YYYYMMDDhh24mmss-ファイル名(メッセージID)
     #形式：jpg
-    f = drive.CreateFile({'title': now.strftime("%Y%m%d%H%M%S") + '-' + file_name,
+    f = drive.CreateFile({'title': now.strftime("%Y%m%d%H%M%S") + '-' + message_id,
                           'mimeType': 'image/jpeg',
                           'parents': [{'kind': 'drive#fileLink', 'id':folder_pass}]})
 
