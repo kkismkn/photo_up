@@ -68,13 +68,12 @@ def callback():
 @handler.add(MessageEvent, message=TextMessage)
 #オウム返し
 def message_text(event):
-    if event.message.text == "アルバム":
-        replyText = "https://drive.google.com/drive/folders/1Sa8RGDT2gVZYGRE_MIJ4_URlErRFBTKi"
-    else:
-        replyList = ["写真を…写真をください…", "写真をくれればクラウドに保存するよ！", "なんや", "はろー", "会話は…ちょっと…",
-                    "わたしがくまだ", "はちみつください", "鮭とかくれてもいいよ"]
-        replyText = random.choice(replyList)
-
+if event.message.text == "アルバム":
+replyText = "https://drive.google.com/drive/folders/1Sa8RGDT2gVZYGRE_MIJ4_URlErRFBTKi"
+else:
+replyList = ["写真を…写真をください…", "写真をくれればクラウドに保存するよ！", "なんや", "はろー", "会話は…ちょっと…",
+            "わたしがくまだ", "はちみつください", "鮭とかくれてもいいよ"]
+replyText = random.choice(replyList)
 
     line_bot_api.reply_message(
         event.reply_token,
