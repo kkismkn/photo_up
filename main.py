@@ -95,11 +95,11 @@ def handle_image(event):
     os.remove(file_name)
 
     #ユーザへ応答
-        replyList = ["いい写真！", "あー、これは…！", "さすがですねぇ！", "素晴らしい！", "もっともっと！", "ありがとう！", "神"]
-        replyText = random.choice(replyList)
-        line_bot_api.reply_message(
-        event.reply_token,
-        TextSendMessage(text=replyText)
+    replyList = ["いい写真！", "あー、これは…！", "さすがですねぇ！", "素晴らしい！", "もっともっと！", "ありがとう！", "神"]
+    replyText = random.choice(replyList)
+    line_bot_api.reply_message(
+    event.reply_token,
+    TextSendMessage(text=replyText)
     )
 
 
