@@ -68,9 +68,14 @@ def callback():
 @handler.add(MessageEvent, message=TextMessage)
 #オウム返し
 def message_text(event):
-    replyList = ["写真を…写真をください…", "写真をくれればクラウドに保存するよ！", "なんや", "はろー", "会話は…ちょっと…",
-                     "わたしがくまだ", "はちみつください", "鮭とかくれてもいいよ"]
-    replyText = random.choice(replyList)
+    if event.message.text == "アルバム":
+        replyText = "https://drive.google.com/drive/folders/1Sa8RGDT2gVZYGRE_MIJ4_URlErRFBTKi"
+    else:
+        replyList = ["写真を…写真をください…", "写真をくれればクラウドに保存するよ！", "なんや", "はろー", "会話は…ちょっと…",
+                    "わたしがくまだ", "はちみつください", "鮭とかくれてもいいよ"]
+        replyText = random.choice(replyList)
+
+
     line_bot_api.reply_message(
         event.reply_token,
         TextSendMessage(text=replyText)
@@ -91,9 +96,9 @@ def handle_image(event):
     os.remove(file_name)
 
     #ユーザへ応答
-    replyList = ["いい写真！", "あー、これは…！", "さすがですねぇ！", "素晴らしい！", "もっともっと！", "ありがとう！", "神"]
-    replyText = random.choice(replyList)
-    line_bot_api.reply_message(
+        replyList = ["いい写真！", "あー、これは…！", "さすがですねぇ！", "素晴らしい！", "もっともっと！", "ありがとう！", "神"]
+        replyText = random.choice(replyList)
+        line_bot_api.reply_message(
         event.reply_token,
         TextSendMessage(text=replyText)
     )
