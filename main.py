@@ -71,13 +71,13 @@ def message_text(event):
     if event.message.text == "アルバム":
         replyText = "https://drive.google.com/drive/folders/1Sa8RGDT2gVZYGRE_MIJ4_URlErRFBTKi"
     else:
-        replyList = ["写真を…写真をください…", "写真をくれればクラウドに保存するよ！", "なんや", "はろー", "会話は…ちょっと…",
+        replyList = ["写真を…¥n写真をください…", "写真をくれればクラウドに保存するよ！", "なんや", "はろー", "会話は…ちょっと…",
                 "わたしがくまだ", "はちみつください", "鮭とかくれてもいいよ"]
         replyText = random.choice(replyList)
 
     line_bot_api.reply_message(
         event.reply_token,
-        TextSendMessage(text=replSyText)
+        TextSendMessage(text=replyText)
     )
 
 #画像メッセージ受診時の挙動をハンドラへ設定
