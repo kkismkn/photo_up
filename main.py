@@ -70,6 +70,11 @@ def callback():
 def message_text(event):
     if event.message.text == "アルバム":
         replyText = "https://drive.google.com/drive/folders/1Sa8RGDT2gVZYGRE_MIJ4_URlErRFBTKi"
+        line_bot_api.reply_message(
+            event.reply_token,
+            TextSendMessage(text=replyText)
+        )
+        return
     elif event.message.text == "新郎プロフィール":
         # 13文字以上は改行が発生するので注意
         replyText = ('【生年月日】\n'
