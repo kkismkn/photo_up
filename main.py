@@ -76,41 +76,34 @@ def message_text(event):
         )
         return
     elif event.message.text == "新郎プロフィール":
+        image_message = ImageSendMessage(
+            original_content_url="https://drive.google.com/uc?export=view&id=12QV4uCPf01EmZHqniRXL_Q3Icmi6cioh",
+            preview_image_url="https://drive.google.com/uc?export=view&id=12QV4uCPf01EmZHqniRXL_Q3Icmi6cioh",
+        )
         # 13文字以上は改行が発生するので注意
-        replyText = ('【生年月日】\n'
+        text_message = TextSendMessage(text='【生年月日】\n'
                      '　1991.04.25\n'
                      '【職業】\n'
-                     '　システム作る人\n'
+                     '　製鉄所のシステム作る人\n'
                      '【趣味】\n'
                      '　酒ハンター、料理\n'
                      '【マイブーム】\n'
-                     '　\n'
-                     '【趣味】\n'
-                     '【趣味】\n'
-                     '【趣味】\n')
-        line_bot_api.reply_message(
-                event.reply_token,
-                TextSendMessage(text=replyText)
-        )
+                     '　\n')
+　　　　　line_bot_api.reply_message(event.reply_token, [image_message,text_message])
         return
     elif event.message.text == "新婦プロフィール":
-
-        #{"type": "image",
-        # "originalContentUrl": "https://example.com/original.jpg",
-        # "previewImageUrl": "https://example.com/preview.jpg"
-        #}
         image_message = ImageSendMessage(
             original_content_url="https://drive.google.com/uc?export=view&id=1i4zZoykqBvAjSdABkY2O5R3_6pEpaTJ8",
             preview_image_url="https://drive.google.com/uc?export=view&id=1i4zZoykqBvAjSdABkY2O5R3_6pEpaTJ8",
         )
         text_message = TextSendMessage(text='【生年月日】\n'
-                             '　1991.12.26\n'
-                             '【職業】\n'
-                             '　保険屋の裏方\n'
-                             '【趣味】\n'
-                             '　映画鑑賞\n'
-                             '【マイブーム】\n'
-                             '　\n')
+                    '　1991.12.26\n'
+                    '【職業】\n'
+                    '　保険代理店の事務\n'
+                    '【趣味】\n'
+                    '　映画鑑賞\n'
+                    '【マイブーム】\n'
+                    '　\n')
         line_bot_api.reply_message(event.reply_token, [image_message,text_message])
         return
     else:
