@@ -101,7 +101,7 @@ def message_text(event):
         #}
         image_message = ImageSendMessage(
             original_content_url="https://example.com/original.jpg",
-            preview_image_url="http://drive.google.com/uc?export=view&id=1-nl9Xdb3RTYqFKgzMVCBPz33jFZs5BIu",
+            preview_image_url="https://drive.google.com/uc?export=view&id=1-nl9Xdb3RTYqFKgzMVCBPz33jFZs5BIu",
         )
         text_message = TextSendMessage(text='【生年月日】\n'
                              '　1991.04.25\n'
