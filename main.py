@@ -85,13 +85,13 @@ def message_text(event):
                      '【趣味】\n')
     elif event.message.text == "新婦プロフィール":
 
-        {"type": "image",
-         "originalContentUrl": "https://example.com/original.jpg",
-         "previewImageUrl": "https://example.com/preview.jpg"
-        }
+        #{"type": "image",
+        # "originalContentUrl": "https://example.com/original.jpg",
+        # "previewImageUrl": "https://example.com/preview.jpg"
+        #}
         image_message = ImageSendMessage(
-            original_content_url="https://drive.google.com/open?id=1QT1zrwbTJgYT_d-Ou-OvO3jZjHUld3z1",
-            preview_image_url="https://date-the-image.herokuapp.com/{preview_image_path}",
+            original_content_url="https://example.com/original.jpg",
+            preview_image_url="https://example.com/preview.jpg",
         )
         line_bot_api.reply_message(event.reply_token, image_message)
         replyText = "https://drive.google.com/drive/folders/1Sa8RGDT2gVZYGRE_MIJ4_URlErRFBTKi"
