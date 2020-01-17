@@ -71,18 +71,24 @@ def message_text(event):
     if event.message.text == "アルバム":
         replyText = "https://drive.google.com/drive/folders/1Sa8RGDT2gVZYGRE_MIJ4_URlErRFBTKi"
     elif event.message.text == "新郎プロフィール":
+        # 13文字以上は改行が発生するので注意
         replyText = ('【生年月日】\n'
                      '　1991.04.25\n'
                      '【職業】\n'
                      '　システム作る人\n'
                      '【趣味】\n'
                      '　酒ハンター、料理\n'
-                     '【】\n'
-                     '【趣味】\n'
+                     '【マイブーム】\n'
+                     '　\n'
                      '【趣味】\n'
                      '【趣味】\n'
                      '【趣味】\n')
     elif event.message.text == "新婦プロフィール":
+        image_message = ImageSendMessage(
+            original_content_url="https://drive.google.com/open?id=1QT1zrwbTJgYT_d-Ou-OvO3jZjHUld3z1",
+            preview_image_url="https://date-the-image.herokuapp.com/{preview_image_path}",
+        )
+        line_bot_api.reply_message(event.reply_token, image_message)
         replyText = "https://drive.google.com/drive/folders/1Sa8RGDT2gVZYGRE_MIJ4_URlErRFBTKi"
     else:
         replyList = ["写真を…\n写真をください…", "写真をくれればクラウドに保存するよ！", "なんや", "はろー", "会話は…ちょっと…",
