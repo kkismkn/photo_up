@@ -103,7 +103,15 @@ def message_text(event):
             original_content_url="https://example.com/original.jpg",
             preview_image_url="https://example.com/preview.jpg",
         )
-        line_bot_api.reply_message(event.reply_token, image_message)
+        text_message = TextSendMessage(text='【生年月日】\n'
+                             '　1991.04.25\n'
+                             '【職業】\n'
+                             '　システム作る人\n'
+                             '【趣味】\n'
+                             '　酒ハンター、料理\n'
+                             '【マイブーム】\n'
+                             '　\n')
+        line_bot_api.reply_message(event.reply_token, image_message,text_message)
         return
     else:
         replyList = ["写真を…\n写真をください…", "写真をくれればクラウドに保存するよ！", "なんや", "はろー", "会話は…ちょっと…",
