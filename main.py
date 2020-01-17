@@ -70,6 +70,20 @@ def callback():
 def message_text(event):
     if event.message.text == "アルバム":
         replyText = "https://drive.google.com/drive/folders/1Sa8RGDT2gVZYGRE_MIJ4_URlErRFBTKi"
+    elif event.message.text == "新郎プロフィール":
+        replyText = ('【生年月日】\n'
+                     '　1991.04.25\n'
+                     '【職業】\n'
+                     '　システム作る人\n'
+                     '【趣味】\n'
+                     '　酒ハンター、料理\n'
+                     '【】\n'
+                     '【趣味】\n'
+                     '【趣味】\n'
+                     '【趣味】\n'
+                     '【趣味】\n')
+    elif event.message.text == "新婦プロフィール":
+        replyText = "https://drive.google.com/drive/folders/1Sa8RGDT2gVZYGRE_MIJ4_URlErRFBTKi"
     else:
         replyList = ["写真を…\n写真をください…", "写真をくれればクラウドに保存するよ！", "なんや", "はろー", "会話は…ちょっと…",
                 "わたしがくまだ", "はちみつください", "鮭とかくれてもいいよ"]
@@ -80,7 +94,7 @@ def message_text(event):
         TextSendMessage(text=replyText)
     )
 
-#画像メッセージ受診時の挙動をハンドラへ設定
+#画像メッセージ受信時の挙動をハンドラへ設定
 @handler.add(MessageEvent, message=ImageMessage)
 def handle_image(event):
     #ファイルをサーバ(Heroku)へ一時保存
