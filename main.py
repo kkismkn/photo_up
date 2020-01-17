@@ -90,7 +90,9 @@ def message_text(event):
                      '【マイブーム】\n'
                      '　XXX\n'
                      '【マイブーム】\n'
-                     '　XXX\n')
+                     '　XXX\n'
+                     '【マイブーム】\n'
+                     '　XXX')
         line_bot_api.reply_message(event.reply_token, [image_message,text_message])
         return
     elif event.message.text == "新婦プロフィール":
