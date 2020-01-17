@@ -100,15 +100,15 @@ def message_text(event):
         # "previewImageUrl": "https://example.com/preview.jpg"
         #}
         image_message = ImageSendMessage(
-            original_content_url="https://example.com/original.jpg",
-            preview_image_url="https://drive.google.com/uc?export=view&id=1-nl9Xdb3RTYqFKgzMVCBPz33jFZs5BIu",
+            original_content_url="https://drive.google.com/uc?export=view&id=1i4zZoykqBvAjSdABkY2O5R3_6pEpaTJ8",
+            preview_image_url="https://drive.google.com/uc?export=view&id=1i4zZoykqBvAjSdABkY2O5R3_6pEpaTJ8",
         )
         text_message = TextSendMessage(text='【生年月日】\n'
-                             '　1991.04.25\n'
+                             '　1991.12.26\n'
                              '【職業】\n'
-                             '　システム作る人\n'
+                             '　保険屋の裏方\n'
                              '【趣味】\n'
-                             '　酒ハンター、料理\n'
+                             '　映画鑑賞\n'
                              '【マイブーム】\n'
                              '　\n')
         line_bot_api.reply_message(event.reply_token, [image_message,text_message])
