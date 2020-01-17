@@ -88,6 +88,11 @@ def message_text(event):
                      '【趣味】\n'
                      '【趣味】\n'
                      '【趣味】\n')
+        line_bot_api.reply_message(
+                event.reply_token,
+                TextSendMessage(text=replyText)
+        )
+        return
     elif event.message.text == "新婦プロフィール":
 
         #{"type": "image",
@@ -99,16 +104,16 @@ def message_text(event):
             preview_image_url="https://example.com/preview.jpg",
         )
         line_bot_api.reply_message(event.reply_token, image_message)
-        replyText = "https://drive.google.com/drive/folders/1Sa8RGDT2gVZYGRE_MIJ4_URlErRFBTKi"
+        return
     else:
         replyList = ["写真を…\n写真をください…", "写真をくれればクラウドに保存するよ！", "なんや", "はろー", "会話は…ちょっと…",
                 "わたしがくまだ", "はちみつください", "鮭とかくれてもいいよ"]
         replyText = random.choice(replyList)
 
-    line_bot_api.reply_message(
-        event.reply_token,
-        TextSendMessage(text=replyText)
-    )
+        line_bot_api.reply_message(
+            event.reply_token,
+            TextSendMessage(text=replyText)
+        )
 
 #画像メッセージ受信時の挙動をハンドラへ設定
 @handler.add(MessageEvent, message=ImageMessage)
