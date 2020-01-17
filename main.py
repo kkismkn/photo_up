@@ -70,7 +70,6 @@ def callback():
 def message_text(event):
     if event.message.text == "アルバム":
         replyText = "https://drive.google.com/drive/folders/1Sa8RGDT2gVZYGRE_MIJ4_URlErRFBTKi"
-        line_bot_api.reply_message(event.reply_token,　TextSendMessage(text=replyText))
     elif event.message.text == "新郎プロフィール":
         # 13文字以上は改行が発生するので注意
         replyText = ('【生年月日】\n'
@@ -84,7 +83,6 @@ def message_text(event):
                      '【趣味】\n'
                      '【趣味】\n'
                      '【趣味】\n')
-        line_bot_api.reply_message(event.reply_token,　TextSendMessage(text=replyText))
     elif event.message.text == "新婦プロフィール":
 
         #{"type": "image",
@@ -96,11 +94,16 @@ def message_text(event):
             preview_image_url="https://example.com/preview.jpg",
         )
         line_bot_api.reply_message(event.reply_token, image_message)
+        replyText = "https://drive.google.com/drive/folders/1Sa8RGDT2gVZYGRE_MIJ4_URlErRFBTKi"
     else:
         replyList = ["写真を…\n写真をください…", "写真をくれればクラウドに保存するよ！", "なんや", "はろー", "会話は…ちょっと…",
                 "わたしがくまだ", "はちみつください", "鮭とかくれてもいいよ"]
         replyText = random.choice(replyList)
-        line_bot_api.reply_message(event.reply_token,　TextSendMessage(text=replyText))
+
+    line_bot_api.reply_message(
+        event.reply_token,
+        TextSendMessage(text=replyText)
+    )
 
 #画像メッセージ受信時の挙動をハンドラへ設定
 @handler.add(MessageEvent, message=ImageMessage)
@@ -152,7 +155,7 @@ def save_image(messege_id):
 
     return file_name
 
-# 新婦画像送信用メッセージ
+# 新婦画像送信用
 def make_image_message():
     messages = ImageSendMessage(
         original_content_url="https://hogehoge.jpg", #JPEG 最大画像サイズ：240×240 最大ファイルサイズ：1MB(注意:仕様が変わっていた)
