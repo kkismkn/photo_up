@@ -86,15 +86,15 @@ def message_text(event):
                      '【職業】\n'
                      '　製鉄所のシステム作る人\n'
                      '【趣味】\n'
-                     '　酒ハンター、料理\n'
-                     '【マイブーム】\n'
-                     '　XXX\n'
-                     '【マイブーム】\n'
-                     '　XXX\n'
-                     '【マイブーム】\n'
-                     '　XXX\n'
-                     '【マイブーム】\n'
-                     '　XXX')
+                     '　酒探し、料理\n'
+                     '【好きな食べ物】\n'
+                     '　最近は魚が旨い。\n'
+                     '【好きな映画】\n'
+                     '　バーフバリ\n'
+                     '【相手を動物に例えると】\n'
+                     '　猫\n'
+                     '【今日の意気込み】\n'
+                     '　このLINEアカウントで遊ぶ')
         line_bot_api.reply_message(event.reply_token, [image_message,text_message])
         return
     elif event.message.text == "新婦プロフィール":
@@ -108,8 +108,14 @@ def message_text(event):
                     '　保険代理店の事務\n'
                     '【趣味】\n'
                     '　映画鑑賞\n'
-                    '【マイブーム】\n'
-                    '　\n')
+                    '【好きな食べ物】\n'
+                    '　食べ物は全部好き。\n'
+                    '【好きな映画】\n'
+                    '　プラダを着た悪魔\n'
+                    '【相手を動物に例えると】\n'
+                    '　キリン\n'
+                    '【今日の意気込み】\n'
+                    '　盛れるアプリで撮って！')
         line_bot_api.reply_message(event.reply_token, [image_message,text_message])
         return
     else:
