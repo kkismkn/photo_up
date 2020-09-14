@@ -69,7 +69,7 @@ def callback():
 #オウム返し
 def message_text(event):
     if event.message.text == "アルバム":
-        replyText = "https://drive.google.com/drive/folders/1Sa8RGDT2gVZYGRE_MIJ4_URlErRFBTKi"
+        replyText = "てすと"
         line_bot_api.reply_message(
             event.reply_token,
             TextSendMessage(text=replyText)
@@ -77,8 +77,8 @@ def message_text(event):
         return
     elif event.message.text == "新郎プロフィール":
         image_message = ImageSendMessage(
-            original_content_url="https://drive.google.com/uc?export=view&id=12QV4uCPf01EmZHqniRXL_Q3Icmi6cioh",
-            preview_image_url="https://drive.google.com/uc?export=view&id=12QV4uCPf01EmZHqniRXL_Q3Icmi6cioh",
+            original_content_url="オリジナル画像のURL",
+            preview_image_url="トークルーム表示画像のURL",
         )
         # 13文字以上は改行が発生するので注意
         text_message = TextSendMessage(text='【生年月日】\n'
@@ -99,8 +99,8 @@ def message_text(event):
         return
     elif event.message.text == "新婦プロフィール":
         image_message = ImageSendMessage(
-            original_content_url="https://drive.google.com/uc?export=view&id=1i4zZoykqBvAjSdABkY2O5R3_6pEpaTJ8",
-            preview_image_url="https://drive.google.com/uc?export=view&id=1i4zZoykqBvAjSdABkY2O5R3_6pEpaTJ8",
+            original_content_url="オリジナル画像のURL",
+            preview_image_url="トークルーム表示画像のURL",
         )
         text_message = TextSendMessage(text='【生年月日】\n'
                     '　1991.12.26\n'
@@ -119,6 +119,7 @@ def message_text(event):
         line_bot_api.reply_message(event.reply_token, [image_message,text_message])
         return
     else:
+        # 上記以外の場合は適当な文言をランダムで返す
         replyList = ["写真を…\n写真をください…", "写真をくれればクラウドに保存するよ！", "なんや", "はろー", "会話は…ちょっと…",
                 "わたしがくまだ", "はちみつください", "鮭とかくれてもいいよ"]
         replyText = random.choice(replyList)
@@ -136,8 +137,9 @@ def handle_image(event):
     file_name = save_image(message_id)
 
     #GoogleDriveへアップロード
-    save_to_google(file_name, message_id, '195Q4Ngwglfd0XDOcMxQ6ruz4ccHHig-p')#個人フォルダ
-    save_to_google(file_name, message_id, '1Sa8RGDT2gVZYGRE_MIJ4_URlErRFBTKi')#公開フォルダ
+    #第3引数には保存先フォルダのパスを指定する。
+    #https://drive.google.com/drive/folders/【XXXXXXXX　←ココ】
+    save_to_google(file_name, message_id, 'フォルダのパス')
 
     #一時保存したファイルを削除
     os.remove(file_name)
@@ -178,13 +180,6 @@ def save_image(messege_id):
 
     return file_name
 
-# 新婦画像送信用
-def make_image_message():
-    messages = ImageSendMessage(
-        original_content_url="https://hogehoge.jpg", #JPEG 最大画像サイズ：240×240 最大ファイルサイズ：1MB(注意:仕様が変わっていた)
-        preview_image_url="https://hogehoge-mini.jpg" #JPEG 最大画像サイズ：1024×1024 最大ファイルサイズ：1MB(注意:仕様が変わっていた)
-    )
-    return messages
 
 if __name__ == "__main__":
     port = int(os.getenv("PORT", 5000))
